@@ -45,3 +45,10 @@ describe Order do
     Order.connection.execute('SELECT name FROM db').should == [{"name"=>'ninja_two', 0=>"ninja_two"}]
   end
 end
+
+describe ConnectionNinja::Orms::ActiveRecord do
+  it "should allow the configuration to be accessed directly" do
+    connection = ConnectionNinja::Config.ninja_config(Customer.configurations, :other)
+    connection.should == {"adapter"=>"sqlite3", "database"=>"spec/db/ninja_two.sqlite3"}
+  end
+end
