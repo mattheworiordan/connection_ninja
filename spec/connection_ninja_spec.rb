@@ -1,11 +1,11 @@
-require 'spec/spec_helper'
+require File.join(File.expand_path(File.dirname(__FILE__)), 'spec_helper')
 
 describe ActiveRecord::Base, "methods" do
   before do
     ActiveRecord::Base.send(:extend, ConnectionNinja::Orms::ActiveRecord)
   end
 
-  it "should have configurtions" do
+  it "should have configurations" do
     ActiveRecord::Base.configurations.should_not == {}
   end
 
