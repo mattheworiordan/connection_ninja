@@ -26,8 +26,8 @@ describe Customer do
     @connection = Customer.establish_connection
   end
   
-  it "should be connected to the alternate database" do
-    Customer.connection.current_database.should == "ninja_one"
+  it "should be connected to the default database" do
+    Customer.connection.execute('SELECT name FROM db').should == [{"name"=>'ninja_one', 0=>"ninja_one"}]
   end
 end
 
@@ -38,11 +38,10 @@ describe Order do
   end
 
   it "should return correct configuration" do
-    Order.send(:ninja_config, :other).should == {"username"=>"rails", "adapter"=>"postgresql", "database"=>"ninja_two", "host"=>"localhost", "password"=>"rails"}
+    Order.send(:ninja_config, :other).should == {"adapter"=>"sqlite3", "database"=>"spec/db/ninja_two.sqlite3"}
   end
 
-  it "should be connected to the default database" do
-    Order.connection.current_database.should == "ninja_two"
+  it "should be connected to the alternate database" do
+    Order.connection.execute('SELECT name FROM db').should == [{"name"=>'ninja_two', 0=>"ninja_two"}]
   end
 end
-

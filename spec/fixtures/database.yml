@@ -1,20 +1,14 @@
 development: &development
-  database: ninja_one
-  host: localhost
-  adapter: postgresql
-  username: rails
-  password: rails
+  database: spec/db/ninja_one.sqlite3
+  adapter: sqlite3
 
 test: 
   <<: *development
 
 other:
   development: &development
-    database: ninja_two
-    host: localhost
-    adapter: postgresql
-    username: rails
-    password: rails
+    database: spec/db/ninja_two.sqlite3
+    adapter: sqlite3
 
   test: 
     <<: *development
